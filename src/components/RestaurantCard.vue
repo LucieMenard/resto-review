@@ -1,8 +1,6 @@
 <script setup>
 // EventCard
 
-import { ref } from "vue";
-
 defineProps({
   restaurant: {
     type: Object,
@@ -12,15 +10,19 @@ defineProps({
 </script>
 
 <template>
-  <div class="restaurant-card">
-    <h2>{{ restaurant.title }}</h2>
-    <p>{{ restaurant.description }}</p>
-    <p>{{ restaurant.location }}</p>
-    <span>
-      Recommended : {{ restaurant.recommended }} | ever tried :
-      {{ restaurant.tried }}</span
-    >
-  </div>
+  <RouterLink
+    class="event-link"
+    :to="{ name: 'restaurant-details', params: { id: restaurant.id } }">
+    <div class="restaurant-card">
+      <h2>{{ restaurant.title }}</h2>
+      <p>{{ restaurant.description }}</p>
+      <p>{{ restaurant.location }}</p>
+      <span>
+        Recommended : {{ restaurant.recommended }} | ever tried :
+        {{ restaurant.tried }}</span
+      >
+    </div>
+  </RouterLink>
 </template>
 
 <style scoped>
@@ -34,5 +36,9 @@ defineProps({
 .restaurant-card:hover {
   transform: scale(1.01);
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+}
+.event-link {
+  color: #2c3e50;
+  text-decoration: none;
 }
 </style>
