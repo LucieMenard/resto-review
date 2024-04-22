@@ -5,23 +5,11 @@ import RestaurantService from "@/services/RestaurantService.js";
 
 const restaurants = ref(null);
 
-const restoTest = ref({
-  id: 123,
-  category: "mexican",
-  title: "Mexico",
-  description: "A Mexican restaurant.",
-  tag: [],
-  location: "Baulieu",
-  date: "January 28, 2022",
-  time: "12:00",
-  tried: false,
-  recommended: "Flo",
-});
-
 onMounted(() => {
   RestaurantService.getRestaurants()
     .then((response) => {
       restaurants.value = response.data;
+      // console.log(response.data);
     })
     .catch((error) => {
       console.log(error);
@@ -32,17 +20,16 @@ onMounted(() => {
 <template>
   <h1>Le temple du palais</h1>
 
-  <div class="restaurants">
+  <div class="restaurants-list">
     <RestaurantCard
-      v-for="resto in restaurant"
+      v-for="r in restaurant"
       :key="restaurant.id"
-      :restaurant="resto" />
-    <RestaurantCard :restaurant="restoTest" />
+      :restaurant="r" />
   </div>
 </template>
 
 <style scoped>
-.restaurants {
+.restaurants-list {
   display: flex;
   flex-direction: column;
   align-items: center;
